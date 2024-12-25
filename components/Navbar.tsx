@@ -9,8 +9,8 @@ const navIcons = [
 
 const Navbar = () => {
   return (
-    <header className="w-full">
-      <nav className="nav">
+    <header className="w-full fixed bg-white z-10">
+      <nav className="nav shadow-[0px_5px_10px_0px_rgba(0,0,0,0.5)] rounded-[15px]">
         <Link href="/" className="flex items-center gap-1">
           <Image
             src="/assets/icons/logo.svg"

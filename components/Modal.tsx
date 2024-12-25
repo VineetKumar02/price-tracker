@@ -4,13 +4,15 @@ import { FormEvent, Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { addUserEmailToProduct } from '@/lib/actions'
+import Link from 'next/link'
 
 interface Props {
-  productId: string
+  productId: string,
+  productURL: string,
 }
 
-const Modal = ({ productId }: Props) => {
-  let [isOpen, setIsOpen] = useState(true)
+const Modal = ({ productId, productURL }: Props) => {
+  let [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState('');
 
@@ -31,9 +33,27 @@ const Modal = ({ productId }: Props) => {
 
   return (
     <>
-      <button type="button" className="btn" onClick={openModal}>
-        Track
-      </button>
+      <div className='flex gap-5'>
+        <button type="button" className="flex-1 btn" onClick={openModal}>
+          Track
+        </button>
+
+        <button className="btn w-fit mx-auto flex-1 flex items-center justify-center gap-3">
+          <Image
+            src="/assets/icons/bag.svg"
+            alt="check"
+            width={22}
+            height={22}
+          />
+          <Link
+            href={productURL}
+            target="_blank"
+            className="text-base text-white"
+          >
+            Buy Now
+          </Link>
+        </button>
+      </div>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" onClose={closeModal} className="dialog-container">
@@ -47,14 +67,14 @@ const Modal = ({ productId }: Props) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0" /> 
+              <Dialog.Overlay className="fixed inset-0" />
             </Transition.Child>
 
             <span
               className="inline-block h-screen align-middle"
               aria-hidden="true"
             />
-            
+
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -68,7 +88,7 @@ const Modal = ({ productId }: Props) => {
                 <div className="flex flex-col">
                   <div className="flex justify-between">
                     <div className="p-3 border border-gray-200 rounded-10">
-                      <Image 
+                      <Image
                         src="/assets/icons/logo.svg"
                         alt="logo"
                         width={28}
@@ -76,7 +96,7 @@ const Modal = ({ productId }: Props) => {
                       />
                     </div>
 
-                    <Image 
+                    <Image
                       src="/assets/icons/x-close.svg"
                       alt="close"
                       width={24}
@@ -100,14 +120,14 @@ const Modal = ({ productId }: Props) => {
                     Email address
                   </label>
                   <div className="dialog-input_container">
-                    <Image 
+                    <Image
                       src="/assets/icons/mail.svg"
                       alt='mail'
                       width={18}
                       height={18}
                     />
 
-                    <input 
+                    <input
                       required
                       type="email"
                       id="email"

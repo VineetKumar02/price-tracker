@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rmdir /s /q node_modules .next || rm -rf node_modules .next"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
